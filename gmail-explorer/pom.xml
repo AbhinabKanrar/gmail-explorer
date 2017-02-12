@@ -5,7 +5,7 @@
   <artifactId>gmail-explorer</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>gmail-hacker</name>
+  <name>gmail-explorer</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -61,7 +61,7 @@
 	    <directory>src/main/resources</directory>
 	  </resource>
 	</resources>
-	<plugins>
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

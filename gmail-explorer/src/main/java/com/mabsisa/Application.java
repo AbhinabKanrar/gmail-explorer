@@ -19,12 +19,16 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.mabsisa.consumer.DataConsumer;
 import com.mabsisa.service.MailChecker;
+import com.mabsisa.util.CommonConstant;
+import com.mashape.unirest.http.Unirest;
 
 import reactor.Environment;
 import reactor.bus.EventBus;
 import reactor.core.config.DispatcherType;
 
 import static reactor.bus.selector.Selectors.$;
+
+import java.io.IOException;
 
 /**
  * @author abhinab
@@ -80,7 +84,7 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		EVENT_BUS.on($("DataConsumer"), dataConsumer);
+		EVENT_BUS.on($(CommonConstant.CONSUMER_KEY), dataConsumer);
 		MailChecker.check(env.getProperty("search.base"), Integer.parseInt(env.getProperty("search.length")));
 	}
 
@@ -90,6 +94,11 @@ public class Application implements CommandLineRunner {
 
 	@PreDestroy
 	void shutdownBus() {
+		try {
+			Unirest.shutdown();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Environment.terminate();
 	}
 

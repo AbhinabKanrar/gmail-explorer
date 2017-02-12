@@ -4,6 +4,7 @@
 package com.mabsisa.service;
 
 import com.mabsisa.Application;
+import com.mabsisa.util.CommonConstant;
 
 import reactor.bus.Event;
 
@@ -22,7 +23,7 @@ public class MailChecker {
 
 	public static void possibleMails(int maxLength, char[] sarchBase, String currMail) {
 		if (currMail.length() == maxLength) {
-			Application.getEventBus().notify("DataConsumer", Event.wrap(currMail));
+			Application.getEventBus().notify(CommonConstant.CONSUMER_KEY, Event.wrap(currMail));
 		} else {
 			for (char item : sarchBase) {
 				String oldMail = currMail;
