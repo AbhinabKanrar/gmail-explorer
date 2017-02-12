@@ -17,7 +17,7 @@ public class DataConsumer implements Consumer<Event<String>> {
 
 	@Override
 	public void accept(Event<String> data) {
-		System.out.println(data);
+		System.out.println("event data: "+data.getData());
 	}
 
 }

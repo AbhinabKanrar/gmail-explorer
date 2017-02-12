@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.mabsisa.consumer.DataConsumer;
+import com.mabsisa.service.MailChecker;
 
 import reactor.Environment;
 import reactor.bus.EventBus;
@@ -35,6 +36,9 @@ import static reactor.bus.selector.Selectors.$;
 @ComponentScan(basePackages = "com.mabsisa")
 public class Application implements CommandLineRunner {
 
+	@Autowired
+	private org.springframework.core.env.Environment env;
+	
 	@Autowired
 	DataConsumer dataConsumer;
 
@@ -69,15 +73,15 @@ public class Application implements CommandLineRunner {
 
 	@Bean
 	EventBus createEventBus(Environment env) {
-		EventBus evBus = EventBus.create(env, Environment.newDispatcher(REACTOR_THREAD_COUNT, REACTOR_THREAD_COUNT,
+		EVENT_BUS = EventBus.create(env, Environment.newDispatcher(REACTOR_THREAD_COUNT, REACTOR_THREAD_COUNT,
 				DispatcherType.THREAD_POOL_EXECUTOR));
-		EVENT_BUS = evBus;
 		return EVENT_BUS;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		EVENT_BUS.on($("DataConsumer"), dataConsumer);
+		MailChecker.check(env.getProperty("search.base"), Integer.parseInt(env.getProperty("search.length")));
 	}
 
 	public static void main(String[] args) {

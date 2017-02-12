@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mabsisa</groupId>
+  <artifactId>gmail-explorer</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>gmail-hacker</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <java.version>1.8</java.version>
+  </properties>
+
+  <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>1.5.1.RELEASE</version>
+  </parent>
+
+  <dependencies>
+	<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.16.14</version>
+	    <scope>provided</scope>
+	</dependency>
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.8.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.mashape.unirest</groupId>
+	    <artifactId>unirest-java</artifactId>
+	    <version>1.4.9</version>
+	</dependency>
+	<dependency>
+	    <groupId>io.projectreactor</groupId>
+	    <artifactId>reactor-bus</artifactId>
+	    <version>2.0.8.RELEASE</version>
+	</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+	    <exclusions>
+	    	<exclusion>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-tomcat</artifactId>
+		</exclusion>
+	    </exclusions>
+        </dependency>
+  </dependencies>
+
+  <build>
+	<finalName>gmail-explorer</finalName>
+	<resources>
+	  <resource>
+	    <directory>src/main/resources</directory>
+	  </resource>
+	</resources>
+	<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                  <source>${java.version}</source>
+                  <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+  </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+	  <id>spring-releases</id>
+	  <name>Spring Releases</name>
+	  <url>https://repo.spring.io/libs-release</url>
+	</pluginRepository>
+  </pluginRepositories>
+
+</project>
